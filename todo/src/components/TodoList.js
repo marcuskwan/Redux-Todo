@@ -13,13 +13,23 @@ export class TodoList extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  addNewTodoAndResetTodoState = event => {
+    this.props.addNewTodo(event, this.state.todo);
+    this.setState({ todo: "" });
+  };
+
   render() {
     return (
       <ul>
-        {this.props.todos.map((todo, index) => (
-          <li onClick={event=> this.toggleTodo(event,index)}>{todo.value}</li>
+        {this.props.todos.map(todo => (
+          <li
+            class={todo.completed && "completed"}
+            onClick={event => this.props.toggleTodo(event,todo)}
+          >
+            {todo.value}
+          </li>
         ))}
-        <form onSubmit={event => this.props.addNewTodo(event, this.props.todo)}>
+        <form onSubmit={this.addNewTodoAndResetTodoState}>
           <input
             name="todo"
             placeholder="Add New Todo"
