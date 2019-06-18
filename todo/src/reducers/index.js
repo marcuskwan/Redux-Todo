@@ -41,11 +41,7 @@ export const reducer = (state = initialState, action) => {
     case DELETE_TODO:
       // return a store object of todos array set to a new mapped array that checks whether the id of the object we clicked on matches the id of the object in our previousStore. If it does, it omits the todo, otherwise it returns the same todo.
       return {
-        todos: state.todos.map(todo =>
-          todo.id === action.payload
-            ? { ...todo, completed: !todo.completed }
-            : todo
-        )
+        todos: state.todos.filter(todo => todo.id !== action.payload)
       };
     default:
       return state;

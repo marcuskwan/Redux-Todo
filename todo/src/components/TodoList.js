@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNewTodo, toggleTodo } from "../actions/index";
+import { addNewTodo, toggleTodo, deleteTodo } from "../actions/index";
 
 export class TodoList extends Component {
   state = {
@@ -22,12 +22,17 @@ export class TodoList extends Component {
     return (
       <ul>
         {this.props.todos.map(todo => (
-          <li
-            class={todo.completed && "completed"}
-            onClick={event => this.props.toggleTodo(event,todo)}
-          >
-            {todo.value}
-          </li>
+          <div className="todo" key={todo.id}>
+            <li
+              className={todo.completed && "completed"}
+              onClick={event => this.props.toggleTodo(event, todo.id)}
+            >
+              {todo.value}
+            </li>
+            <button onClick={event => this.props.deleteTodo(event, todo.id)}>
+              Delete
+            </button>
+          </div>
         ))}
         <form onSubmit={this.addNewTodoAndResetTodoState}>
           <input
@@ -44,7 +49,6 @@ export class TodoList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     todos: state.todos
   };
@@ -52,5 +56,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addNewTodo, toggleTodo }
+  { addNewTodo, toggleTodo, deleteTodo }
 )(TodoList);
