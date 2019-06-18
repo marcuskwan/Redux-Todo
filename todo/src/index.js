@@ -10,13 +10,14 @@ import { Provider } from "react-redux";
 // importing reducer
 import { reducer } from "./reducers";
 
-// create store, linking it with reducer fn
+// create store, linking store/global state with reducer fn
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
+  // giving provider access to the store allows entire app access to the store/global state
   <Provider store={store}>
     <App />
   </Provider>,
