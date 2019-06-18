@@ -3,7 +3,7 @@
 // declaring initialState 
 
 // const initialState = () => {
-//     todo: [];
+//     todos: [];
 // }
 
 // exporting and declaring reducer fn
